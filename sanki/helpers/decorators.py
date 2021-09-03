@@ -3,8 +3,8 @@ from typing import Callable
 from pyrogram import Client
 from pyrogram.types import Message
 
-from MusicKen.config import SUDO_USERS
-from MusicKen.helpers.admins import get_administrators
+from Sanki_Music.config import SUDO_USERS
+from Sanki_Music.helpers.admins import get_administrators
 
 
 def errors(func: Callable) -> Callable:
