@@ -3,8 +3,8 @@ from asyncio.queues import QueueEmpty
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-from MusicKen.function.admins import set
-from MusicKen.services.callsmusic import callsmusic
+from Sanki_Music.function.admins import set
+from Sanki_Music.services.callsmusic import callsmusic
 
 
 @Client.on_message(
@@ -16,16 +16,16 @@ async def pause(_, message: Message):
         conid = conchat.linked_chat.id
         chid = conid
     except:
-        await message.reply("**Apakah obrolan terhubung?**")
+        await message.reply("**𝐈𝐬 𝐭𝐡𝐞 𝐜𝐡𝐚𝐭 𝐜𝐨𝐧𝐧𝐞𝐜𝐭𝐞𝐝?**")
         return
     chat_id = chid
     if (chat_id not in callsmusic.pytgcalls.active_calls) or (
         callsmusic.pytgcalls.active_calls[chat_id] == "paused"
     ):
-        await message.reply_text("❗ **Nothing is playing!**")
+        await message.reply_text("❗ **𝐍𝐨𝐭𝐡𝐢𝐧𝐠 𝐢𝐬 𝐏𝐥𝐚𝐲𝐢𝐧𝐠!**")
     else:
         callsmusic.pytgcalls.pause_stream(chat_id)
-        await message.reply_text("▶️ **Paused!**")
+        await message.reply_text("▶️ **𝐏𝐚𝐮𝐬𝐞𝐝!**")
 
 
 @Client.on_message(
@@ -37,16 +37,16 @@ async def resume(_, message: Message):
         conid = conchat.linked_chat.id
         chid = conid
     except:
-        await message.reply("**Apakah obrolan terhubung?**")
+        await message.reply("**𝐈𝐬 𝐭𝐡𝐞 𝐂𝐡𝐚𝐭 𝐂𝐨𝐧𝐧𝐞𝐜𝐭𝐞𝐝?**")
         return
     chat_id = chid
     if (chat_id not in callsmusic.pytgcalls.active_calls) or (
         callsmusic.pytgcalls.active_calls[chat_id] == "playing"
     ):
-        await message.reply_text("❗ **Tidak ada Lagu yang sedang diputar!**")
+        await message.reply_text("❗ **𝐍𝐨𝐓𝐡𝐢𝐧𝐠 𝐢𝐬 𝐏𝐥𝐚𝐲𝐢𝐧𝐠 𝐂𝐮𝐫𝐫𝐞𝐧𝐭𝐥𝐲")
     else:
         callsmusic.pytgcalls.resume_stream(chat_id)
-        await message.reply_text("⏸ **Resumed!**")
+        await message.reply_text("⏸ **𝐑𝐞𝐬𝐮𝐦𝐞𝐝!**")
 
 
 @Client.on_message(
@@ -58,11 +58,11 @@ async def stop(_, message: Message):
         conid = conchat.linked_chat.id
         chid = conid
     except:
-        await message.reply("**Apakah obrolan terhubung?**")
+        await message.reply("**𝐈𝐬 𝐭𝐡𝐞 𝐜𝐡𝐚𝐭 𝐜𝐨𝐧𝐧𝐞𝐜𝐭𝐞𝐝?**")
         return
     chat_id = chid
     if chat_id not in callsmusic.pytgcalls.active_calls:
-        await message.reply_text("❗ **Tidak ada Lagu yang sedang diputar!**")
+        await message.reply_text("❗ **𝐍𝐨𝐭𝐡𝐢𝐧𝐠 𝐢𝐬 𝐂𝐮𝐫𝐫𝐞𝐧𝐭𝐥𝐲 𝐏𝐥𝐚𝐲𝐢𝐧𝐠!**")
     else:
         try:
             callsmusic.queues.clear(chat_id)
@@ -70,7 +70,7 @@ async def stop(_, message: Message):
             pass
 
         callsmusic.pytgcalls.leave_group_call(chat_id)
-        await message.reply_text("❌ **Memberhentikan Lagu!**")
+        await message.reply_text("❌ **𝐒𝐭𝐨𝐩𝐩𝐢𝐧𝐠 𝐓𝐡𝐞 𝐒𝐨𝐧𝐠!**")
 
 
 @Client.on_message(
@@ -83,11 +83,11 @@ async def skip(_, message: Message):
         conid = conchat.linked_chat.id
         chid = conid
     except:
-        await message.reply("**Apakah obrolan terhubung?**")
+        await message.reply("**𝐈𝐬 𝐭𝐡𝐞 𝐂𝐡𝐚𝐭 𝐂𝐨𝐧𝐧𝐞𝐜𝐭𝐞𝐝?**")
         return
     chat_id = chid
     if chat_id not in callsmusic.pytgcalls.active_calls:
-        await message.reply_text("❗ **Tidak ada Lagu Selanjutnya untuk dilewati!**")
+        await message.reply_text("❗ **𝐓𝐡𝐞𝐫𝐞 𝐢𝐬 𝐍𝐨 𝐧𝐞𝐱𝐭 𝐒𝐨𝐧𝐠 𝐭𝐨 𝐒𝐤𝐢𝐩😑!**")
     else:
         callsmusic.queues.task_done(chat_id)
 
@@ -98,7 +98,7 @@ async def skip(_, message: Message):
                 chat_id, callsmusic.queues.get(chat_id)["file"]
             )
 
-        await message.reply_text("⏩ **Melewati lagu saat ini!**")
+        await message.reply_text("⏩ **𝐒𝐤𝐢𝐩𝐩𝐞𝐝 𝐂𝐮𝐫𝐫𝐞𝐧𝐭 𝐒𝐨𝐧𝐠!**")
 
 
 @Client.on_message(filters.command("channeladmincache"))
@@ -108,7 +108,7 @@ async def admincache(client, message: Message):
         conid = conchat.linked_chat.id
         chid = conid
     except:
-        await message.reply("**Apakah obrolan terhubung?**")
+        await message.reply("**𝐈𝐬 𝐭𝐡𝐞 𝐜𝐡𝐚𝐭 𝐜𝐨𝐧𝐧𝐞𝐜𝐭𝐞𝐝?**")
         return
     set(
         chid,
@@ -117,4 +117,4 @@ async def admincache(client, message: Message):
             for member in await conchat.linked_chat.get_members(filter="administrators")
         ],
     )
-    await message.reply_text("✅️ **Daftar admin** telah **diperbarui**")
+    await message.reply_text("✅️ **𝐀𝐝𝐦𝐢𝐧 𝐥𝐢𝐬𝐭** 𝐡𝐚𝐬 𝐛𝐞𝐞𝐧 **𝐮𝐩𝐝𝐚𝐭𝐞𝐝**")
