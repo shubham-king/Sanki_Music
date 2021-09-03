@@ -22,7 +22,7 @@ from MusicKen.config import API_HASH, API_ID, BG_IMAGE, BOT_TOKEN
 from MusicKen.services.callsmusic import run
 
 response = requests.get(BG_IMAGE)
-file = open("./fuck/20210902_081210.png", "wb")
+file = open("./fucked/20210902_081210.png", "wb")
 file.write(response.content)
 file.close()
 
