@@ -19,7 +19,7 @@ from typing import List, Union
 
 from pyrogram import filters
 
-from MusicKen.config import COMMAND_PREFIXES
+from Sanki_Music.config import COMMAND_PREFIXES
 
 other_filters = filters.group & ~filters.edited & ~filters.via_bot & ~filters.forwarded
 other_filters2 = (
