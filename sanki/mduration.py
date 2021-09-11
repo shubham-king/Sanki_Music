@@ -10,7 +10,7 @@ async def songs(client, message):
     try:
         if len(message.command) < 2:
             await message.reply_text(
-                "❌ **No Song found.**\n\n**Coba Masukan  Judul lagu yang lebih jelas.**"
+                "❌ **No Song found.**\n\n**Entre A fresh song name.**"
             )
             return
         text = message.text.split(None, 1)[1]
